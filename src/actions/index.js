@@ -1,7 +1,8 @@
+import { reset } from 'redux-form';
+
 import {
   getUsers,
   getUserPosts,
-  getPost,
   getPostComments,
   createPost,
   deletePost,
@@ -31,10 +32,10 @@ export const fetchUsers = () => async (dispatch, getState) => {
       type: FETCH_USERS,
       payload: users,
     });
-    dispatch(setSpinnerStatus(false));
   } catch (error) {
     console.error('Failed to get users from the api', error);
   }
+  dispatch(setSpinnerStatus(false));
 };
 
 export const fetchSelectedUserPosts = () => async (dispatch, getState) => {
@@ -46,10 +47,10 @@ export const fetchSelectedUserPosts = () => async (dispatch, getState) => {
       type: FETCH_USER_POSTS,
       payload: userPosts,
     });
-    dispatch(setSpinnerStatus(false));
   } catch (error) {
     console.error('Failed to fetch user posts', error);
   }
+  dispatch(setSpinnerStatus(false));
 };
 
 export const fetchSelectedPostComments = () => async (dispatch, getState) => {
@@ -61,10 +62,10 @@ export const fetchSelectedPostComments = () => async (dispatch, getState) => {
       type: FETCH_POST_COMMENTS,
       payload: postComments,
     });
-    dispatch(setSpinnerStatus(false));
   } catch (error) {
     console.error('Failed to fetch selected post comments', error);
   }
+  dispatch(setSpinnerStatus(false));
 };
 
 export const selectUser = (user) => ({
@@ -77,10 +78,20 @@ export const selectUserPost = (post) => ({
   payload: post,
 });
 
-export const createUserPost = (post) => ({
-  type: CREATE_USER_POST,
-  payload: post,
-});
+export const createUserPost = (post) => async (dispatch, getState) => {
+  try {
+    dispatch(setSpinnerStatus(true));
+    const { data } = await createPost(post);
+    dispatch(reset('postCreate'));
+    dispatch({
+      type: FETCH_USER_POSTS,
+      payload: [...getState().userPosts, data],
+    });
+  } catch (error) {
+    console.error('Failed to create a post', error);
+  }
+  dispatch(setSpinnerStatus(false));
+};
 
 export const deleteUserPost = (post) => async (dispatch, getState) => {
   try {
@@ -92,8 +103,8 @@ export const deleteUserPost = (post) => async (dispatch, getState) => {
         payload: getState().userPosts.filter(p => p.id !== post.id),
       });
     }
-    dispatch(setSpinnerStatus(false));
   } catch (error) {
     console.error('Failed to delete user post', error);
   }
+  dispatch(setSpinnerStatus(false));
 };

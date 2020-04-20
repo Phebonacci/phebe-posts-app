@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import usersReducer from './usersReducer';
 import userPosts from './userPostsReducer';
 import selectedUserReducer from './selectedUserReducer';
@@ -13,4 +14,5 @@ export default combineReducers({
   selectedPost: selectedPostReducer,
   selectedPostComments: selectedPostCommentsReducer,
   spinnerLoading: spinnerReducer,
+  form: formReducer,
 });
