@@ -7,7 +7,7 @@ import Loader from '../Loader/Loader';
 const List = ({ children, isLoading }) => {
   return (
     <Container theme='list'>
-      <Loader isActive={isLoading} />
+      { isLoading && <Loader /> }
       <div className='ui divided items comments'>
         { children }
       </div>
