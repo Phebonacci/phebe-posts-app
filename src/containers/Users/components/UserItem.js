@@ -17,6 +17,7 @@ const UserItem = (props) => {
       className='item'
       to={`/users/${user.id}`}
       onClick={() => onClick(user)}
+      data-testid='user-item'
     >
       <Content>
         <Title>{user.name}</Title>

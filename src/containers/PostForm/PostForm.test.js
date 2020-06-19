@@ -18,6 +18,8 @@ const mockHistory = {
 };
 
 const setup = (customProps = {}, customState = {}) => {
+  // NOTE: cleanup is called by default when react testing library is paired with
+  // a testing framework that supports afterEach, such as jest
   const initialState = {
     selectedUser: mockUser,
     spinnerLoading: false,
