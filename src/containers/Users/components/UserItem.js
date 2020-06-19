@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import Title from '../../../components/Title/Title';
+import Avatar from '../../../components/Avatar/Avatar';
+import TextContent from '../../../components/TextContent/TextContent';
+import Content from '../../../components/Content/Content';
+
 import userIcon from '../../../icons/user.svg';
 
 const UserItem = (props) => {
@@ -9,20 +14,19 @@ const UserItem = (props) => {
   return (
     <Link
       key={user.id}
-      className="item"
+      className='item'
       to={`/users/${user.id}`}
       onClick={() => onClick(user)}
     >
-      <div className="content">
-        <div className="header">{user.name}</div>
-        <div className="description">
-          <p>{user.company && user.company.name}</p>
-        </div>
-      </div>
+      <Content>
+        <Title>{user.name}</Title>
+        <TextContent>{user.company && user.company.name}</TextContent>
+      </Content>
 
-      <span className="ui tiny image">
-        <img alt={user.name} src={user.avatar || userIcon} />
-      </span>
+      <Avatar
+        src={user.avatar || userIcon}
+        alt={user.name}
+      />
     </Link>
   );
 };

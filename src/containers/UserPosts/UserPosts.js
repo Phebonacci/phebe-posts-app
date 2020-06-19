@@ -11,6 +11,7 @@ import {
   selectUserPost,
   deleteUserPost,
 } from '../../actions';
+import Container from '../../components/Container/Container';
 
 class UserPosts extends React.Component {
 
@@ -33,23 +34,23 @@ class UserPosts extends React.Component {
   render() {
     const { user = {}, posts, spinnerLoading, history } = this.props;
     return (
-      <div className="ui container">
+      <Container>
         <button
-          className="ui button"
+          className='ui button'
           onClick={history.goBack}
         >
           Back
         </button>
         <h1>{user.name}'s Posts</h1>
         <Link
-          className="fluid ui button"
+          className='fluid ui button'
           to={`/users/${user.id}/post-form`}>
           Create New Post
         </Link>
         <List isLoading={spinnerLoading}>
           { posts.map(this.renderUserPostItem) }
         </List>
-      </div>
+      </Container>
     );
   }
 }

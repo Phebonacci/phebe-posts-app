@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+import Divider from '../../components/Divider/Divider';
+import PrimaryHeader from '../../components/PrimaryHeader/PrimaryHeader';
+import Container from '../../components/Container/Container';
+import Loader from '../../components/Loader/Loader';
+
 import { createUserPost } from '../../actions';
 
-class PostForm extends React.Component {
+export class PostForm extends React.Component {
 
   onSubmit = (formValues) => {
     const { createUserPost, user } = this.props;
@@ -14,45 +19,56 @@ class PostForm extends React.Component {
 
   render() {
     const { user, history, handleSubmit, spinnerLoading } = this.props;
-    const activeLoaderClassName = spinnerLoading ? 'active' : '';
     return (
-      <div className="ui container">
+      <Container testId='component-post-form'>
         <button
-          type="button"
-          className="ui button"
+          type='button'
+          className='ui button'
+          data-testid='back-button'
           onClick={history.goBack}
         >
           Back
         </button>
-        <h1 className="ui header">Create new post for {user.name}</h1>
-        <div className="ui divider"></div>
-        <form className="ui form" onSubmit={handleSubmit(this.onSubmit)}>
-          <div className="field">
-            <label>Title</label>
+        <PrimaryHeader>Create new post for {user.name}</PrimaryHeader>
+        <Divider />
+        <form
+          data-testid='form'
+          className='ui form'
+          onSubmit={handleSubmit(this.onSubmit)}
+        >
+          <div className='field'>
+            <label htmlFor='title'>Title</label>
             <Field
-              name="title"
-              component="input"
-              placeholder="Title"
-              type="text"
+              id='title'
+              name='title'
+              data-testid='title-input'
+              component='input'
+              placeholder='Title'
+              type='text'
               required
             />
           </div>
 
-          <div className="field">
-            <label>Content</label>
+          <div className='field'>
+            <label htmlFor='body'>Content</label>
             <Field
-              name="body"
-              component="textarea"
+              id='body'
+              name='body'
+              data-testid='content-textarea'
+              component='textarea'
               required
             />
           </div>
 
-          <button className="ui button primary" type="submit">Submit</button>
+          <button
+            data-testid='submit-button'
+            className='ui button primary'
+            type='submit'>
+            Submit
+          </button>
         </form>
-        <div className={`ui ${activeLoaderClassName} inverted dimmer`}>
-          <div className="ui text loader">Loading</div>
-        </div>
-      </div>
+        { spinnerLoading && <Loader text='Saving' /> }
+      </Container>
     );
   }
 }

@@ -1,4 +1,4 @@
-import { FETCH_USERS } from "../actions";
+import { FETCH_USERS } from '../actions';
 
 export default (users = [], action) => {
   if (action.type === FETCH_USERS) {

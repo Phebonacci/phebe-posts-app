@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import List from '../../components/List/List';
 import UserItem from './components/UserItem';
+import PrimaryHeader from '../../components/PrimaryHeader/PrimaryHeader';
+import Container from '../../components/Container/Container';
 
 import { fetchUsers, selectUser } from '../../actions';
 
@@ -26,12 +28,12 @@ class Users extends React.Component {
   render() {
     const { users, spinnerLoading } = this.props;
     return (
-      <div className="ui container">
-        <h1 className="ui header">Members</h1>
+      <Container>
+        <PrimaryHeader>Members</PrimaryHeader>
         <List isLoading={spinnerLoading}>
           { users.map(this.renderUserItem)}
         </List>
-      </div>
+      </Container>
     );
   }
 }
