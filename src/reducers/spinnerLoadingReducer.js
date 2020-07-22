@@ -1,4 +1,4 @@
-import { SPINNER_LOADING } from "../actions"
+import { SPINNER_LOADING } from '../actions'
 
 
 export default (spinnerLoading = false, action) => {

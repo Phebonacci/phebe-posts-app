@@ -11,10 +11,10 @@ const App = () => {
     <div>
       <BrowserRouter>
         <div>
-          <Route key="Users" path="/" exact component={Users} />
-          <Route key="UserPosts" path="/users/:userId" exact component={UserPosts} />
-          <Route key="Post" path="/users/:userId/posts/:postId" exact component={Post} />
-          <Route key="PostNew" path="/users/:userId/post-form" exact component={PostForm} />
+          <Route key='Users' path='/' exact component={Users} />
+          <Route key='UserPosts' path='/users/:userId' exact component={UserPosts} />
+          <Route key='Post' path='/users/:userId/posts/:postId' exact component={Post} />
+          <Route key='PostNew' path='/users/:userId/post-form' exact component={PostForm} />
         </div>
       </BrowserRouter>
     </div>

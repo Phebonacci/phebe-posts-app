@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import List from '../../components/List/List';
-import PostCommentItem from './components/PostCommentItem';
+import Comment from '../../components/Comment/Comment';
+import Divider from '../../components/Divider/Divider';
 
 import { fetchSelectedPostComments } from '../../actions';
+import PrimaryHeader from '../../components/PrimaryHeader/PrimaryHeader';
+import SecondaryHeader from '../../components/SecondaryHeader/SecondaryHeader';
+import Container from '../../components/Container/Container';
 
 class Post extends React.Component {
 
@@ -14,28 +18,30 @@ class Post extends React.Component {
   }
 
   renderCommentItem = (comment) => {
-    return <PostCommentItem key={comment.id} comment={comment} />;
+    return <Comment key={comment.id} comment={comment} />;
   }
 
   render() {
     const { post, comments, spinnerLoading, history } = this.props;
     return (
-      <div className="ui container">
+      <Container>
         <button
-          className="ui button"
+          className='ui button'
           onClick={history.goBack}
         >
           Back
         </button>
-        <h1 className="ui header">{post.title}</h1>
+
+        <PrimaryHeader>{post.title}</PrimaryHeader>
         <p>{post.body}</p>
 
-        <div className="ui divider"></div>
-        <h2 className="ui header">Comments</h2>
+        <Divider />
+
+        <SecondaryHeader>Comments</SecondaryHeader>
         <List isLoading={spinnerLoading}>
           { comments.map(this.renderCommentItem) }
         </List>
-      </div>
+      </Container>
     );
   }
 }

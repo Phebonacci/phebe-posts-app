@@ -8,7 +8,7 @@ import {
   deletePost,
 } from '../apis/jsonPlaceholder';
 
-export const FETCH_USERS = 'FETCH_USERS';
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USER_POSTS = 'FETCH_USER_POSTS';
 export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS';
 
@@ -29,7 +29,7 @@ export const fetchUsers = () => async (dispatch, getState) => {
     dispatch(setSpinnerStatus(true));
     const { data: users } = await getUsers();
     dispatch({
-      type: FETCH_USERS,
+      type: FETCH_USERS_SUCCESS,
       payload: users,
     });
   } catch (error) {

@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './List.css';
+import Container from '../Container/Container';
+import Loader from '../Loader/Loader';
 
-const List = (props) => {
-  const activeLoaderClassName = props.isLoading ? 'active' : '';
+const List = ({ children, isLoading }) => {
   return (
-    <div className="ui container list">
-      <div className={`ui ${activeLoaderClassName} inverted dimmer`}>
-        <div className="ui text loader">Loading</div>
+    <Container theme='list'>
+      { isLoading && <Loader /> }
+      <div className='ui divided items comments'>
+        { children }
       </div>
-      <div className="ui divided items comments">
-        { props.children }
-      </div>
-    </div>
+    </Container>
   );
 };
 
